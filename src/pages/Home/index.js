@@ -48,7 +48,7 @@ export default function Home({ navigation }) {
     { id: 11, image: require('../../assets/menu10.png'), url: 'https://absenpg.my.canva.site/staplinkok',
             title: 'DOWNLOAD SERTIFIKAT'
      },
-    { id: 12, image: require('../../assets/menu11.png'), url: 'https://absenpg.my.canva.site/staplinkok',
+    { id: 12, image: require('../../assets/menu11.png'), url: 'https://absenpg.my.canva.site/presensimyprime',
             title: 'PRESENSI SISWA'
      },
     { id: 13, image: require('../../assets/menu12.png'), url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT1A7-Kwt91K28NzdQjLlxidaE-vaxP5dHR5mWz9SNAyZTV0bkOOb9UQ8BFMN4iGB49E3HC1cKDfZse/pubhtml?gid=0&single=true',
