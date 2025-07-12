@@ -19,11 +19,12 @@ import FhPolosConfig from './ontpage/fhpolos';
 import ZteDualbandConfig from './ontpage/ztedualband';
 import UniversalOntConfig from './ontpage/univont';
 import WebViewScreen from './WebView';
-
+import Kunci from './WebView/Kunci';
 
 export {
   Splash,
   Home,
+  Kunci,
   Login,
   Account,
   AccountEdit,
@@ -43,14 +44,4 @@ export {
   ZteDualbandConfig,
   UniversalOntConfig,
   WebViewScreen,
-  
-
-
-
-
-
-
-
-  
-
 };

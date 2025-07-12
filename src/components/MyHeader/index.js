@@ -1,39 +1,40 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { colors, fonts } from '../../utils';
-import { useNavigation } from '@react-navigation/native';
-import { Icon } from 'react-native-elements';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {colors, fonts} from '../../utils';
+import {useNavigation} from '@react-navigation/native';
+import {Icon} from 'react-native-elements';
 
-export default function MyHeader({ 
-  onPress, 
-  color = colors.white, 
-  title, 
-  icon = false, 
-  iconname = 'search' 
+export default function MyHeader({
+  onPress,
+  color = colors.white,
+  title,
+  icon = false,
+  noback = false,
+  iconname = 'search',
 }) {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.headerContent}>
-        <TouchableOpacity 
-          onPress={() => navigation.goBack()} 
-          style={styles.backButton}
-        >
-          <Icon 
-            type='ionicon' 
-            name='arrow-back-outline' 
-            size={20} 
-            color={color} 
-          />
-        </TouchableOpacity>
+        {!noback && (
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}>
+            <Icon
+              type="ionicon"
+              name="arrow-back-outline"
+              size={20}
+              color={color}
+            />
+          </TouchableOpacity>
+        )}
 
         <View style={styles.titleWrapper}>
-          <Text 
-            style={[styles.title, { color }]}
+          <Text
+            style={[styles.title, {color}]}
             numberOfLines={1}
-            ellipsizeMode="tail"
-          >
+            ellipsizeMode="tail">
             {title}
           </Text>
         </View>
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     ...fonts.headline2,
     textAlign: 'center',
     maxWidth: '80%', // Prevents title from touching screen edges,
-    top:10
+    top: 10,
   },
   iconButton: {
     width: 40,

@@ -20,29 +20,32 @@ public class KioskModeModule extends ReactContextBaseJavaModule {
         return true; // TAMBAHKAN INI
     }
 
-    @ReactMethod
-    public void enterKioskMode() {
-        Activity activity = getCurrentActivity();
-        if (activity != null) {
-            activity.runOnUiThread(() -> {
-                activity.getWindow().addFlags(
-                    android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
-                    android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-                );
-            });
-        }
+   @ReactMethod
+public void enterKioskMode() {
+    Activity activity = getCurrentActivity();
+    if (activity != null) {
+        activity.runOnUiThread(() -> {
+            try {
+                activity.startLockTask(); // ✅ Kunci aplikasi
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
+}
 
     @ReactMethod
-    public void exitKioskMode() {
-        Activity activity = getCurrentActivity();
-        if (activity != null) {
-            activity.runOnUiThread(() -> {
-                activity.getWindow().clearFlags(
-                    android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
-                    android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-                );
-            });
-        }
+public void exitKioskMode() {
+    Activity activity = getCurrentActivity();
+    if (activity != null) {
+        activity.runOnUiThread(() -> {
+            try {
+                activity.stopLockTask(); // 🔓 Keluar dari mode terkunci
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
+}
+
 }

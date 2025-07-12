@@ -12,6 +12,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.primegeneration.KioskModePackage;
 import com.primegeneration.AppUtilsPackage;
+import com.rn.kiosk.mode.KioskModeModule;  // add this import
+
 
 
 public class MainApplication extends Application implements ReactApplication {
@@ -28,8 +30,9 @@ public class MainApplication extends Application implements ReactApplication {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
-          packages.add(new AppUtilsPackage());
+          // packages.add(new KioskModeModule());
+          // packages.add(new AppUtilsPackage());
+          packages.add(new KioskModePackage());
          
           return packages;
         }

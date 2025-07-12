@@ -1,62 +1,65 @@
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { colors, fonts } from '../../utils'
-import { MyHeader } from '../../components'
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import React from 'react';
+import {colors, fonts} from '../../utils';
+import {MyHeader} from '../../components';
 
 export default function ONTPage({navigation}) {
-
-      const ontMenus = [
-    { 
-      id: 1, 
-      name: 'ZTE', 
+  const ontMenus = [
+    {
+      id: 1,
+      name: 'ZTE',
       color: '#C62828',
-      screen: 'ZTEConfig' 
+      screen: 'ZTEConfig',
     },
-    { 
-      id: 2, 
-      name: 'FH ACS', 
+    {
+      id: 2,
+      name: 'FH ACS',
       color: '#1565C0',
-      screen: 'FhAcsConfig' 
+      screen: 'FhAcsConfig',
     },
-    { 
-      id: 3, 
-      name: 'FH POLOS', 
+    {
+      id: 3,
+      name: 'FH POLOS',
       color: '#00838F',
-      screen: 'FhPolosConfig' 
+      screen: 'FhPolosConfig',
     },
-    { 
-      id: 4, 
-      name: 'ZTE DUALBAND', 
+    {
+      id: 4,
+      name: 'ZTE DUALBAND',
       color: '#D84315',
-      screen: 'ZteDualbandConfig' 
+      screen: 'ZteDualbandConfig',
     },
-    { 
-      id: 5, 
-      name: 'UNIVERSAL-ONT', 
+    {
+      id: 5,
+      name: 'UNIVERSAL-ONT',
       color: '#2E7D32',
-      screen: 'UniversalOntConfig' 
+      screen: 'UniversalOntConfig',
     },
   ];
 
-
-   return (
+  return (
     <View style={styles.container}>
       <MyHeader title="ONT TYPE" onPress={() => navigation.goBack()} />
-      
+
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {ontMenus.map((menu) => (
+        {ontMenus.map(menu => (
           <TouchableOpacity
             key={menu.id}
-            style={[styles.menuItem, { backgroundColor: menu.color }]}
-            onPress={() => navigation.navigate(menu.screen)}
-          >
+            style={[styles.menuItem, {backgroundColor: menu.color}]}
+            onPress={() => navigation.navigate(menu.screen)}>
             <Text style={styles.menuText}>{menu.name}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -71,7 +74,6 @@ const styles = StyleSheet.create({
     padding: 25,
     marginBottom: 15,
     alignItems: 'center',
-   
   },
   menuText: {
     fontFamily: fonts.primary[700],

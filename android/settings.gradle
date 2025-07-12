@@ -1,3 +1,5 @@
 rootProject.name = 'RutanAmbon'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
+include ':react-native-kiosk-mode'
+project(':react-native-kiosk-mode').projectDir = file('../node_modules/react-native-kiosk-mode/android')
