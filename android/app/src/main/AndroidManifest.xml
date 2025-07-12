@@ -11,9 +11,17 @@ xmlns:tools="http://schemas.android.com/tools"
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
- 
+  <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-permission android:name="android.permission.PREVENT_POWER_KEY" />
+<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+
 
     <application
+    
     android:usesCleartextTraffic="true"
       android:exported="true"
       android:name=".MainApplication"
@@ -23,19 +31,34 @@ xmlns:tools="http://schemas.android.com/tools"
       android:allowBackup="false"
       tools:replace="android:icon"
       android:theme="@style/AppTheme">
-      <activity
-        android:exported="true"
-        android:name=".MainActivity"
-        android:label="@string/app_name"
-        android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-        android:launchMode="singleTask"
-        android:windowSoftInputMode="adjustResize">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-             <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>     
-        </intent-filter>
-      </activity>
+  <activity
+    android:name=".MainActivity"
+    android:exported="true"
+    android:label="@string/app_name"
+    android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+    android:launchMode="singleTask"
+    android:windowSoftInputMode="adjustResize">
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+</activity>
+
+
+<receiver
+    android:name=".MyDeviceAdminReceiver"
+    android:permission="android.permission.BIND_DEVICE_ADMIN"
+    android:exported="false">
+    <meta-data
+        android:name="android.app.device_admin"
+        android:resource="@xml/device_admin_receiver" />
+    <intent-filter>
+        <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+    </intent-filter>
+</receiver>
+
+
+    
     </application>
 
     <queries>

@@ -129,8 +129,9 @@ android {
         applicationId "com.primegeneration"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "2.5"
+         minSdkVersion 21 
     }
 
      packagingOptions {
