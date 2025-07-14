@@ -17,37 +17,58 @@ import {WebView} from 'react-native-webview';
 import {MyHeader} from '../../components';
 import {colors} from '../../utils';
 import CookieManager from '@react-native-cookies/cookies';
+import SoundPlayer from 'react-native-sound-player';
 
 export default function Kunci({navigation, route}) {
   const {KioskMode} = NativeModules;
   const item = route.params;
   useEffect(() => {
+    // 🔐 Masuk mode kiosk
     KioskMode.enterKioskMode();
-    console.log('KioskMode Native =>', NativeModules.KioskMode.enterKioskMode);
-    CookieManager.clearAll(); // opsional bersihkan cookie dulu
+
+    // 🧪 Debug (opsional)
+    console.log(
+      'KioskMode enter =>',
+      typeof NativeModules.KioskMode.enterKioskMode,
+    );
+    // 🧹 Bersihkan cookie jika diperlukan
+    CookieManager.clearAll();
+
+    // 🔒 Cegah tombol back
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       () => {
+        SoundPlayer.playSoundFile('salah', 'mp3'); // 🔊 Putar suara dulu
+
         Alert.alert(
           'Peringatan',
           'Kamu tidak bisa kembali saat mengerjakan latihan!',
           [
-            {text: 'Lanjut', onPress: () => {}},
+            {
+              text: 'Lanjut',
+              onPress: () => {},
+              style: 'cancel',
+            },
             {
               text: 'Tetap Keluar',
               onPress: () => {
-                KioskMode.exitKioskMode();
-                navigation.goBack();
+                KioskMode.exitKioskMode(); // 🔓 Keluarkan dari kiosk
+                navigation.goBack(); // ⬅️ Kembali
               },
             },
           ],
         );
-        return true; // tetap cegah back
+        return true;
       },
     );
 
-    return () => backHandler.remove();
+    // 🔁 Cleanup saat unmount
+    return () => {
+      backHandler.remove();
+      KioskMode.exitKioskMode(); // Jaga-jaga jika tidak keluar dari alert
+    };
   }, []);
+
   const injectedJS = `
     document.querySelectorAll('a[target="_blank"]').forEach(el => {
       el.removeAttribute('target');
