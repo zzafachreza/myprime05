@@ -22,19 +22,23 @@ import SoundPlayer from 'react-native-sound-player';
 export default function Kunci({navigation, route}) {
   const {KioskMode} = NativeModules;
   const item = route.params
+    const backHandlerRef = useRef(null);
   const cekKiosmode = async () => {
     const isActive = await KioskMode.isKioskModeActive();
 
     if (!isActive) {
-      navigation.goBack()
-      alert("Mode full belum diaktifkan, silahkan klik 'mengerti'")
+      if (backHandlerRef.current) {
+        backHandlerRef.current.remove()
+      }
+      navigation.replace("Home");
+      alert("Mode full belum diaktifkan, silahkan klik 'mengerti'");
     }
   }
   useEffect(() => {
   
     setTimeout(() => {
       cekKiosmode();
-    }, 2000);
+    }, 5000);
     
 
   // 🔐 Masuk mode kiosk
@@ -69,6 +73,9 @@ export default function Kunci({navigation, route}) {
                 onPress: () => {
                   KioskMode.exitKioskMode();
                   navigation.goBack();
+                 if (backHandlerRef.current) {
+                      backHandlerRef.current.remove();
+                    }
                 },
               },
             ],
@@ -77,9 +84,13 @@ export default function Kunci({navigation, route}) {
         },
       );
 
+        backHandlerRef.current = backHandler;
+
       // 🔁 Cleanup saat unmount
       return () => {
-        backHandler.remove();
+      if (backHandlerRef.current) {
+            backHandlerRef.current.remove();
+          }
         KioskMode.exitKioskMode();
       };
     })
